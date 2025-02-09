@@ -30,8 +30,8 @@ int main(int argc, char* argv[]) {
 
 	hFile = ::CreateFile(
 		 /* _In_     LPCWSTR               lpFileName            */filePath				
-		,/* _In_	 DWORD                 dwDesiredAccess       */GENERIC_WRITE		
-		,/* _In_	 DWORD                 dwShareMode           */0					
+		,/* _In_     DWORD                 dwDesiredAccess       */GENERIC_WRITE		
+		,/* _In_     DWORD                 dwShareMode           */0					
 		,/* _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes  */nullptr				
 		,/* _In_     DWORD                 dwCreationDisposition */CREATE_ALWAYS		
 		,/* _In_     DWORD                 dwFlagsAndAttributes  */FILE_ATTRIBUTE_NORMAL
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 	dumped = MiniDumpWriteDump(
 		 /* _In_     HANDLE                            hProcess        */hProcess
 		,/* _In_     DWORD                             ProcessId       */LsassProcessID
-		,/* _In_     HANDLE                            hFile     	   */hFile
+		,/* _In_     HANDLE                            hFile           */hFile
 		,/* _In_     MINIDUMP_TYPE                     DumpType        */MiniDumpWithFullMemory
 		,/* _In_opt_ PMINIDUMP_EXCEPTION_INFORMATION   ExceptionParam  */nullptr
 		,/* _In_opt_ PMINIDUMP_USER_STREAM_INFORMATION UserStreamParam */nullptr
