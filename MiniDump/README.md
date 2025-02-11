@@ -1,4 +1,4 @@
-# Extracting user passwords from lsass.exe dumps
+# Extracting user passwords from lsass.exe
 
 Get the PID of the lsass process with `tasklist`
 
