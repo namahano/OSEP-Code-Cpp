@@ -29,18 +29,18 @@ int main(int argc, wchar_t* argv[])
 		return EXIT_FAILURE;
 	}
 
-    WCHAR               username[256],
-                        sysdir[256];
+	WCHAR               username[256],
+	                    sysdir[256];
 
     LPWSTR              cmd          = argv[1];
 
     DWORD               username_len = sizeof(username) / sizeof(username[0]),
-                        sysdir_len   = sizeof(sysdir) / sizeof(sysdir[0]);
+	                    sysdir_len   = sizeof(sysdir) / sizeof(sysdir[0]);
 
     HANDLE              hPipe        = nullptr,
-                        tokenHandle  = nullptr,
-                        sysToken     = nullptr,
-                        env          = nullptr;
+	                    tokenHandle  = nullptr,
+	                    sysToken     = nullptr,
+	                    env          = nullptr;
 
 	PROCESS_INFORMATION pi;
 	STARTUPINFO         si;
